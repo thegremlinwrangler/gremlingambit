@@ -1,174 +1,67 @@
-<!-- 
-===========================================
-  DECK OF DUMBASSERY — Blogger Embed
-  Paste into your Blogger page HTML view.
-  Add questions in the DOD_CARDS section.
-===========================================
--->
-
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&family=Cabin:wght@400;700&display=swap" rel="stylesheet">
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
 <style>
-#dod-wrap * { box-sizing: border-box; margin: 0; padding: 0; }
-#dod-wrap {
-  --gold: #f5c518;
-  --gold-dk: #c49a0a;
-  --green: #0d3d1a;
-  --green-mid: #1a6b3a;
-  --cream: #fdf6e3;
-  font-family: 'Nunito', 'Arial Rounded MT Bold', Arial, sans-serif;
-  background: transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem 1rem 1.5rem;
-}
-.dod-q-badge {
-  align-self: flex-start;
-  background: var(--green-mid);
-  color: var(--gold);
-  font-size: 0.7rem;
-  font-weight: 900;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 3px 12px;
-  border-radius: 20px;
-  margin-bottom: 12px;
-  flex-shrink: 0;
-}
-.dod-q-text {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--green);
-  line-height: 1.5;
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-.dod-opts { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
-.dod-opt {
-  background: rgba(13,61,26,0.07);
-  border: 1.5px solid rgba(13,61,26,0.12);
-  border-radius: 10px;
-  padding: 7px 10px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #2a2a2a;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.dod-opt-tag {
-  background: var(--green-mid);
-  color: var(--gold);
-  font-size: 0.7rem;
-  font-weight: 900;
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.dod-tap-hint {
-  text-align: center;
-  font-size: 0.65rem;
-  color: rgba(13,61,26,0.3);
-  margin-top: 10px;
-}
-.dod-ans-badge {
-  font-size: 0.7rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.dod-ans-main {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: #fff;
-  line-height: 1.3;
-  margin-bottom: 12px;
-  padding: 0 12px;
-}
-.dod-ans-explain {
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.65);
-  line-height: 1.6;
-  padding: 0 12px;
-}
-.dod-ans-tap {
-  position: absolute;
-  bottom: 14px;
-  font-size: 0.63rem;
-  color: rgba(255,255,255,0.25);
-}
-.dod-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 1.6rem;
-  justify-content: center;
-}
-.dod-btn {
-  background: linear-gradient(rgb(127,255,0), rgb(255,95,21));
-  border-radius: 999px;
-  border: 3px solid rgb(255,95,21);
-  box-shadow: rgb(245,197,66) 0px 4px 0px, rgba(0,0,0,0.25) 0px 6px 12px;
-  color: white;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-  padding: 12px 24px;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
-  display: inline-block;
-}
-.dod-btn:hover { transform: translateY(-2px); }
-.dod-btn:active { transform: translateY(2px); }
-.dod-counter {
-  margin-top: 0.75rem;
-  font-size: 0.72rem;
-  color: rgba(255,255,255,0.55);
-  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
-}
-.dod-cf-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 9999; }
-.dod-cp {
-  position: absolute;
-  width: 8px; height: 8px;
-  border-radius: 2px;
-  animation: dod-fall 1.2s ease-out forwards;
-  opacity: 0;
-}
-@keyframes dod-fall {
-  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(400px) rotate(720deg); opacity: 0; }
-}
-</style>
+body { margin:0; padding:20px; background:#1a1a1a; display:flex; flex-direction:column; align-items:center; font-family:Arial,sans-serif; }
 
-<div id="dod-wrap">
-  <div id="dodScene" style="width:500px;height:320px;min-width:500px;min-height:320px;perspective:1200px;cursor:pointer;display:block;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.8)) drop-shadow(0 0 60px rgba(245,197,24,0.25));transition:filter 0.2s,transform 0.15s;flex-shrink:0;">
-    <div id="dodCard" style="width:500px;height:320px;position:relative;transform-style:preserve-3d;transition:transform 0.65s cubic-bezier(0.4,0,0.2,1);">
-      <div style="position:absolute;top:0;left:0;width:500px;height:320px;border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;border:none;">
-        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjPGS2NMqKD2-I8tfXA1hQJP7G14jiVgz2dp1RvNmziZOWOtOUNkr0x9stCs4QO-JNYE14mie74FvrqYjg6M1J4I9bX907hOrGdbjr1YsHPiVLclYHgImkRTwZ4UYTyG6_EtqdM1LR-eXRiJwELk0cAEwvWPnhdAob62I4KTiIplXDmEQ/s1600/Deck%20of%20Dumbassery.png" alt="Deck of Dumbassery" style="width:100%;height:100%;object-fit:cover;display:block;">
-        <div style="position:absolute;bottom:14px;width:100%;text-align:center;font-size:0.72rem;font-weight:700;color:rgba(255,255,255,0.55);letter-spacing:1px;text-shadow:0 1px 4px rgba(0,0,0,0.9);">tap to draw a card</div>
-      </div>
-      <div id="dodFront" style="position:absolute;top:0;left:0;width:500px;height:320px;border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;border:none;transform:rotateY(180deg);display:flex;flex-direction:column;padding:22px 24px 16px;background:#fdf6e3;"></div>
+.scene { width:500px; height:320px; perspective:1200px; cursor:pointer; margin-bottom:20px; }
+.scene:hover { opacity:0.95; }
+
+.card { width:500px; height:320px; position:relative; transform-style:preserve-3d; transition:transform 0.65s cubic-bezier(0.4,0,0.2,1); }
+.card.flipped { transform:rotateY(180deg); }
+
+.face { position:absolute; top:0; left:0; width:500px; height:320px; border-radius:20px; backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:hidden; }
+
+.back { background:#1a6b3a; }
+.back img { width:100%; height:100%; object-fit:cover; display:block; }
+.back-hint { position:absolute; bottom:14px; width:100%; text-align:center; font-size:12px; color:rgba(255,255,255,0.6); }
+
+.front { background:#fdf6e3; transform:rotateY(180deg); padding:22px 24px 16px; display:flex; flex-direction:column; box-sizing:border-box; }
+.front.answer-mode { background:#0d3d1a; justify-content:center; align-items:center; text-align:center; }
+
+.q-num { display:inline-block; background:#1a6b3a; color:#f5c518; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:3px 12px; border-radius:20px; margin-bottom:12px; }
+.q-text { font-size:16px; font-weight:700; color:#0d3d1a; line-height:1.5; flex:1; display:flex; align-items:center; }
+.opts { display:flex; flex-direction:column; gap:6px; margin-top:10px; }
+.opt { background:rgba(13,61,26,0.08); border:1.5px solid rgba(13,61,26,0.15); border-radius:10px; padding:7px 10px; font-size:13px; font-weight:700; color:#222; display:flex; align-items:center; gap:8px; }
+.opt-tag { background:#1a6b3a; color:#f5c518; font-size:11px; font-weight:900; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.tap-hint { text-align:center; font-size:11px; color:#999; margin-top:10px; }
+
+.ans-label { font-size:11px; font-weight:700; letter-spacing:2px; color:#f5c518; text-transform:uppercase; margin-bottom:14px; }
+.ans-text { font-size:22px; font-weight:900; color:#ffffff; line-height:1.3; margin-bottom:14px; padding:0 12px; }
+.ans-explain { font-size:14px; color:rgba(255,255,255,0.8); line-height:1.6; padding:0 12px; }
+.ans-tap { font-size:10px; color:rgba(255,255,255,0.35); margin-top:16px; }
+
+.controls { display:flex; gap:16px; margin-top:4px; }
+.btn { background:linear-gradient(rgb(127,255,0), rgb(255,95,21)); border-radius:999px; border:3px solid rgb(255,95,21); box-shadow:rgb(245,197,66) 0px 4px 0px; color:white; font-size:16px; font-weight:800; padding:12px 24px; cursor:pointer; }
+.btn:hover { transform:translateY(-2px); }
+.btn:active { transform:translateY(2px); }
+
+.counter { margin-top:10px; font-size:12px; color:rgba(255,255,255,0.4); }
+</style>
+</head>
+<body>
+
+<div class="scene" id="scene">
+  <div class="card" id="card">
+    <div class="face back">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjPGS2NMqKD2-I8tfXA1hQJP7G14jiVgz2dp1RvNmziZOWOtOUNkr0x9stCs4QO-JNYE14mie74FvrqYjg6M1J4I9bX907hOrGdbjr1YsHPiVLclYHgImkRTwZ4UYTyG6_EtqdM1LR-eXRiJwELk0cAEwvWPnhdAob62I4KTiIplXDmEQ/s1600/Deck%20of%20Dumbassery.png" alt="Deck of Dumbassery">
+      <div class="back-hint">tap to draw a card</div>
     </div>
+    <div class="face front" id="front"></div>
   </div>
-  <div class="dod-controls">
-    <button class="dod-btn" >🎲 NEXT CARD</button>
-    <button class="dod-btn" >🔀 RESHUFFLE</button>
-  </div>
-  <div class="dod-counter" id="dodCounter"></div>
 </div>
 
-<div class="dod-cf-wrap" id="dodCF"></div>
+<div class="controls">
+  <button class="btn" id="nextBtn">🎲 NEXT CARD</button>
+  <button class="btn" id="resetBtn">🔀 RESHUFFLE</button>
+</div>
+<div class="counter" id="counter"></div>
 
 <script>
-window.addEventListener("load", function(){
-
+/* =====================================================
+   YOUR CARDS GO HERE — add as many as you like
+   ===================================================== */
 var CARDS = [
   {
     q: "How many gremlins does it take to change a lightbulb?",
@@ -207,19 +100,19 @@ var CARDS = [
     explanation: "The first alarm is a suggestion. The fifth is a threat."
   },
   {
-    q: "Someone replies-all to a company-wide email to say 'thanks.' What happens next?",
+    q: "Someone replies-all to a company-wide email to say thanks. What happens next?",
     options: ["Seventeen more reply-alls. Each one worse.", "One brave soul replies-all asking people to stop replying-all.", "The company collapses. An era ends."],
     answer: "Seventeen more reply-alls. Each one worse.",
     explanation: "It has never not been this."
   },
   {
-    q: "Why do humans say 'I'll remember that, I don't need to write it down'?",
+    q: "Why do humans say they'll remember something and don't need to write it down?",
     options: ["Optimism. Tragic, beautiful optimism.", "To give gremlins something to do.", "They won't remember it. Nobody has ever remembered it."],
     answer: "They won't remember it. Nobody has ever remembered it.",
     explanation: "The note exists for a reason. The reason is you."
   },
   {
-    q: "You send a message and immediately see '...' then it disappears. What happens next?",
+    q: "You send a message and see ... then it disappears. What happens next?",
     options: ["Nothing. You wait forever. You are still waiting.", "A reply arrives 4 hours later as if nothing happened.", "You reread your message 47 times looking for what you did."],
     answer: "You reread your message 47 times looking for what you did.",
     explanation: "You did nothing. But you'll never believe that."
@@ -243,16 +136,16 @@ var CARDS = [
     explanation: "This is a system. It's a terrible system. It's the only system."
   },
   {
-    q: "You've been using a piece of technology incorrectly for 3 years. You discover the right way. What do you do?",
+    q: "You've been using technology incorrectly for 3 years and discover the right way. What do you do?",
     options: ["Tell no one. Take this to the grave.", "Immediately explain the correct method to everyone as if you always knew.", "Sit with the shame. Let it change you."],
     answer: "Tell no one. Take this to the grave.",
     explanation: "What they don't know can't hurt you."
   },
   {
-    q: "What does 'I'm fine' mean?",
+    q: "What does I'm fine mean?",
     options: ["I am fine.", "I am the opposite of fine and I need you to ask again.", "I have achieved a level of not-fine so advanced it has looped back around."],
     answer: "I have achieved a level of not-fine so advanced it has looped back around.",
-    explanation: "'Fine' is a spectrum. We are at the far end."
+    explanation: "Fine is a spectrum. We are at the far end."
   },
   {
     q: "A gremlin has rearranged everything in your kitchen while you slept. What is the most human response?",
@@ -261,8 +154,9 @@ var CARDS = [
     explanation: "Humans are infuriatingly resilient. The gremlins find this annoying."
   }
 ];
+/* ===================================================== */
 
-var deck=[], idx=0, state=0, LABELS=['A','B','C','D'];
+var deck=[], idx=0, state=0;
 
 function shuffle(a){
   var b=a.slice();
@@ -270,96 +164,68 @@ function shuffle(a){
   return b;
 }
 
-var BASE='position:absolute;top:0;left:0;width:500px;height:320px;border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;border:none;transform:rotateY(180deg);display:flex;';
-
 function load(){
   var c=CARDS[deck[idx]];
-  var f=document.getElementById('dodFront');
-  f.style.cssText=BASE+'flex-direction:column;padding:22px 24px 16px;background:#fdf6e3;';
-  var badge='<div style="display:inline-block;background:#1a6b3a;color:#f5c518;font-size:0.7rem;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;padding:3px 12px;border-radius:20px;margin-bottom:12px;flex-shrink:0;">Question '+(idx+1)+' of '+CARDS.length+'</div>';
-  var qtext='<div style="font-family:Arial,sans-serif;font-size:1rem;font-weight:700;color:#0d3d1a;line-height:1.5;flex:1;display:flex;align-items:center;padding:4px 0;">'+c.q+'</div>';
-  var opts='<div style="display:flex;flex-direction:column;gap:6px;margin-top:10px;">'+
-    c.options.map(function(o,i){
-      return '<div style="background:rgba(13,61,26,0.07);border:1.5px solid rgba(13,61,26,0.12);border-radius:10px;padding:7px 10px;font-family:Arial,sans-serif;font-size:0.82rem;font-weight:700;color:#2a2a2a;display:flex;align-items:center;gap:8px;">'+
-        '<span style="background:#1a6b3a;color:#f5c518;font-size:0.7rem;font-weight:900;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">'+LABELS[i]+'</span>'+
-        o+'</div>';
-    }).join('')+
-  '</div>';
-  var hint='<div style="text-align:center;font-family:Arial,sans-serif;font-size:0.65rem;color:#666;margin-top:10px;">tap again to reveal the answer</div>';
-  f.innerHTML=badge+qtext+opts+hint;
-  document.getElementById('dodCounter').textContent=
-    'card '+(idx+1)+' of '+CARDS.length+' \u00b7 reshuffles automatically';
+  var f=document.getElementById('front');
+  f.className='face front';
+  f.innerHTML=
+    '<div class="q-num">Question '+(idx+1)+' of '+CARDS.length+'</div>'+
+    '<div class="q-text">'+c.q+'</div>'+
+    '<div class="opts">'+
+      ['A','B','C'].map(function(l,i){
+        return '<div class="opt"><span class="opt-tag">'+l+'</span>'+c.options[i]+'</div>';
+      }).join('')+
+    '</div>'+
+    '<div class="tap-hint">tap again to reveal the answer</div>';
+  document.getElementById('counter').textContent='card '+(idx+1)+' of '+CARDS.length+' · reshuffles automatically';
 }
 
-function answer(){
+function showAnswer(){
   var c=CARDS[deck[idx]];
-  var f=document.getElementById('dodFront');
-  f.style.cssText=BASE+'flex-direction:column;justify-content:center;align-items:center;text-align:center;background:#0d3d1a;';
-  var badge='<div style="font-family:Arial,sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:2px;color:#f5c518;text-transform:uppercase;margin-bottom:12px;">\u2726 The Answer \u2726</div>';
-  var main='<div style="font-family:Arial,sans-serif;font-size:1.4rem;font-weight:700;color:#fff;line-height:1.3;margin-bottom:12px;padding:0 12px;">'+c.answer+'</div>';
-  var explain='<div style="font-family:Arial,sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.85);line-height:1.6;padding:0 12px;">'+c.explanation+'</div>';
-  var tap='<div style="position:absolute;bottom:14px;font-family:Arial,sans-serif;font-size:0.63rem;color:rgba(255,255,255,0.5);">tap for next card</div>';
-  f.innerHTML=badge+main+explain+tap;
-  confetti();
+  var f=document.getElementById('front');
+  f.className='face front answer-mode';
+  f.innerHTML=
+    '<div class="ans-label">✦ The Answer ✦</div>'+
+    '<div class="ans-text">'+c.answer+'</div>'+
+    '<div class="ans-explain">'+c.explanation+'</div>'+
+    '<div class="ans-tap">tap for next card</div>';
 }
 
-function dodClick(){
-  var card=document.getElementById('dodCard');
-  if(state===0){card.style.transform='rotateY(180deg)';state=1;}
-  else if(state===1){answer();state=2;}
-  else{dodNext();}
+function handleClick(){
+  var card=document.getElementById('card');
+  if(state===0){ card.classList.add('flipped'); state=1; }
+  else if(state===1){ showAnswer(); state=2; }
+  else{ nextCard(); }
 }
 
-function dodNext(e){
-  if(e)e.stopPropagation();
+function nextCard(){
   idx++;
-  if(idx>=CARDS.length){deck=shuffle(CARDS.map(function(_,i){return i;}));idx=0;}
-  var card=document.getElementById('dodCard');
-  card.style.transition='none';
-  card.style.transform='rotateY(0deg)';
-  card.offsetWidth;
-  card.style.transition='transform 0.65s cubic-bezier(0.4,0,0.2,1)';
+  if(idx>=CARDS.length){ deck=shuffle(CARDS.map(function(_,i){return i;})); idx=0; }
+  var card=document.getElementById('card');
+  card.classList.remove('flipped');
+  var f=document.getElementById('front');
+  f.className='face front';
+  setTimeout(function(){ load(); }, 50);
   state=0;
-  load();
 }
 
-function dodReset(e){
-  if(e)e.stopPropagation();
+function resetDeck(){
   deck=shuffle(CARDS.map(function(_,i){return i;}));
   idx=0;
-  var card=document.getElementById('dodCard');
-  card.style.transition='none';
-  card.style.transform='rotateY(0deg)';
-  card.offsetWidth;
-  card.style.transition='transform 0.65s cubic-bezier(0.4,0,0.2,1)';
+  var card=document.getElementById('card');
+  card.classList.remove('flipped');
+  var f=document.getElementById('front');
+  f.className='face front';
+  setTimeout(function(){ load(); }, 50);
   state=0;
-  load();
 }
 
-function confetti(){
-  var wrap=document.getElementById('dodCF');
-  wrap.innerHTML='';
-  var cols=['#f5c518','#2d9e56','#e87c1e','#ffffff','#ff6b6b'];
-  for(var i=0;i<30;i++){
-    var el=document.createElement('div');
-    el.className='dod-cp';
-    el.style.cssText=
-      'left:'+(10+Math.random()*80)+'%;'+
-      'top:'+(20+Math.random()*30)+'%;'+
-      'background:'+cols[Math.floor(Math.random()*cols.length)]+';'+
-      'animation-delay:'+(Math.random()*0.3)+'s;'+
-      'animation-duration:'+(0.9+Math.random()*0.5)+'s;'+
-      'transform:rotate('+Math.floor(Math.random()*360)+'deg);';
-    wrap.appendChild(el);
-  }
-}
-
-document.getElementById("dodScene").addEventListener("click", dodClick);
-document.getElementById("dodNextBtn").addEventListener("click", function(e){ e.stopPropagation(); dodNext(e); });
-document.getElementById("dodResetBtn").addEventListener("click", function(e){ e.stopPropagation(); dodReset(e); });
+document.getElementById('scene').addEventListener('click', handleClick);
+document.getElementById('nextBtn').addEventListener('click', function(e){ e.stopPropagation(); nextCard(); });
+document.getElementById('resetBtn').addEventListener('click', function(e){ e.stopPropagation(); resetDeck(); });
 
 deck=shuffle(CARDS.map(function(_,i){return i;}));
 load();
-
-});
 </script>
+</body>
+</html>
