@@ -2,42 +2,151 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body { margin:0; padding:20px; background:#1a1a1a; display:flex; flex-direction:column; align-items:center; font-family:Arial,sans-serif; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { 
+  background: #1a1a1a; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: flex-start;
+  padding: 20px;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
 
-.scene { width:500px; height:320px; perspective:1200px; cursor:pointer; margin-bottom:20px; }
-.scene:hover { opacity:0.95; }
+.scene { 
+  width: 500px; 
+  height: 320px; 
+  perspective: 1200px; 
+  cursor: pointer;
+  flex-shrink: 0;
+}
 
-.card { width:500px; height:320px; position:relative; transform-style:preserve-3d; transition:transform 0.65s cubic-bezier(0.4,0,0.2,1); }
-.card.flipped { transform:rotateY(180deg); }
+.card { 
+  width: 500px; 
+  height: 320px; 
+  position: relative; 
+  transform-style: preserve-3d; 
+  transition: transform 0.65s cubic-bezier(0.4,0,0.2,1); 
+}
+.card.flipped { transform: rotateY(180deg); }
 
-.face { position:absolute; top:0; left:0; width:500px; height:320px; border-radius:20px; backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:hidden; }
+.face { 
+  position: absolute; 
+  top: 0; left: 0; 
+  width: 500px; 
+  height: 320px; 
+  border-radius: 20px; 
+  backface-visibility: hidden; 
+  -webkit-backface-visibility: hidden; 
+  overflow: hidden; 
+}
 
-.back { background:#1a6b3a; }
-.back img { width:100%; height:100%; object-fit:cover; display:block; }
-.back-hint { position:absolute; bottom:14px; width:100%; text-align:center; font-size:12px; color:rgba(255,255,255,0.6); }
+.back { background: #1a6b3a; }
+.back img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.back-hint { 
+  position: absolute; 
+  bottom: 14px; 
+  width: 100%; 
+  text-align: center; 
+  font-size: 12px; 
+  color: rgba(255,255,255,0.6); 
+}
 
-.front { background:#fdf6e3; transform:rotateY(180deg); padding:22px 24px 16px; display:flex; flex-direction:column; box-sizing:border-box; }
-.front.answer-mode { background:#0d3d1a; justify-content:center; align-items:center; text-align:center; }
+.front { 
+  background: #fdf6e3; 
+  transform: rotateY(180deg); 
+  padding: 20px 22px 14px; 
+  display: flex; 
+  flex-direction: column; 
+}
 
-.q-num { display:inline-block; background:#1a6b3a; color:#f5c518; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:3px 12px; border-radius:20px; margin-bottom:12px; }
-.q-text { font-size:16px; font-weight:700; color:#0d3d1a; line-height:1.5; flex:1; display:flex; align-items:center; }
-.opts { display:flex; flex-direction:column; gap:6px; margin-top:10px; }
-.opt { background:rgba(13,61,26,0.08); border:1.5px solid rgba(13,61,26,0.15); border-radius:10px; padding:7px 10px; font-size:13px; font-weight:700; color:#222; display:flex; align-items:center; gap:8px; }
-.opt-tag { background:#1a6b3a; color:#f5c518; font-size:11px; font-weight:900; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.tap-hint { text-align:center; font-size:11px; color:#999; margin-top:10px; }
+.q-num { 
+  display: inline-block; 
+  background: #1a6b3a; 
+  color: #f5c518; 
+  font-size: 11px; 
+  font-weight: 700; 
+  letter-spacing: 1px; 
+  text-transform: uppercase; 
+  padding: 3px 12px; 
+  border-radius: 20px; 
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+.q-text { 
+  font-size: 15px; 
+  font-weight: 700; 
+  color: #0d3d1a; 
+  line-height: 1.45; 
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.opts { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
+.opt { 
+  background: rgba(13,61,26,0.07); 
+  border: 1px solid rgba(13,61,26,0.15); 
+  border-radius: 8px; 
+  padding: 6px 10px; 
+  font-size: 12px; 
+  font-weight: 700; 
+  color: #222222; 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+}
+.opt-tag { 
+  background: #1a6b3a; 
+  color: #f5c518; 
+  font-size: 10px; 
+  font-weight: 900; 
+  min-width: 20px;
+  height: 20px; 
+  border-radius: 50%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  flex-shrink: 0; 
+}
+.tap-hint { text-align: center; font-size: 10px; color: #999; margin-top: 8px; }
 
-.ans-label { font-size:11px; font-weight:700; letter-spacing:2px; color:#f5c518; text-transform:uppercase; margin-bottom:14px; }
-.ans-text { font-size:22px; font-weight:900; color:#ffffff; line-height:1.3; margin-bottom:14px; padding:0 12px; }
-.ans-explain { font-size:14px; color:rgba(255,255,255,0.8); line-height:1.6; padding:0 12px; }
-.ans-tap { font-size:10px; color:rgba(255,255,255,0.35); margin-top:16px; }
+.answer-mode { 
+  background: #0d3d1a; 
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
+  padding: 20px;
+}
+.ans-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #f5c518; text-transform: uppercase; margin-bottom: 12px; }
+.ans-text { font-size: 20px; font-weight: 900; color: #ffffff; line-height: 1.3; margin-bottom: 12px; padding: 0 10px; }
+.ans-explain { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.5; padding: 0 10px; }
+.ans-tap { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 14px; }
 
-.controls { display:flex; gap:16px; margin-top:4px; }
-.btn { background:linear-gradient(rgb(127,255,0), rgb(255,95,21)); border-radius:999px; border:3px solid rgb(255,95,21); box-shadow:rgb(245,197,66) 0px 4px 0px; color:white; font-size:16px; font-weight:800; padding:12px 24px; cursor:pointer; }
-.btn:hover { transform:translateY(-2px); }
-.btn:active { transform:translateY(2px); }
+.controls { 
+  display: flex; 
+  gap: 16px; 
+  margin-top: 20px;
+  flex-shrink: 0;
+}
+.btn { 
+  background: linear-gradient(rgb(127,255,0), rgb(255,95,21)); 
+  border-radius: 999px; 
+  border: 3px solid rgb(255,95,21); 
+  box-shadow: rgb(245,197,66) 0px 4px 0px; 
+  color: white; 
+  font-size: 16px; 
+  font-weight: 800; 
+  padding: 12px 24px; 
+  cursor: pointer; 
+  font-family: Arial, sans-serif;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(2px); }
 
-.counter { margin-top:10px; font-size:12px; color:rgba(255,255,255,0.4); }
+.counter { margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.35); }
 </style>
 </head>
 <body>
@@ -59,69 +168,66 @@ body { margin:0; padding:20px; background:#1a1a1a; display:flex; flex-direction:
 <div class="counter" id="counter"></div>
 
 <script>
-/* =====================================================
-   YOUR CARDS GO HERE — add as many as you like
-   ===================================================== */
 var CARDS = [
   {
     q: "How many gremlins does it take to change a lightbulb?",
-    options: ["16.3. We're not taking questions.", "1 to hold the bulb, 25 to spin the room.", "Don't be silly. Bright lights. Rule #1. DUH."],
-    answer: "Don't be silly. Bright lights. Rule #1. DUH.",
+    options: ["16.3. Not taking questions.", "1 to hold the bulb, 25 to spin the room.", "Bright lights. Rule 1. DUH."],
+    answer: "Bright lights. Rule 1. DUH.",
     explanation: "This was never up for debate."
   },
   {
     q: "Why did the human put the empty milk carton back in the fridge?",
-    options: ["To age it. Like cheese. They read that somewhere.", "They didn't. That's a gremlin in a human suit.", "Hope. Just pure, delusional hope."],
-    answer: "They didn't. That's a gremlin in a human suit.",
+    options: ["To age it. Like cheese.", "A gremlin in a human suit did it.", "Hope. Pure, delusional hope."],
+    answer: "A gremlin in a human suit did it.",
     explanation: "No human has ever done this voluntarily."
   },
   {
-    q: "What is the correct response when someone says 'we need to talk'?",
-    options: ["Immediate and total psychological collapse.", "'About what?' in a voice that's definitely fine.", "Fake your own death. Relocate. Start over."],
+    q: "What is the correct response when someone says we need to talk?",
+    options: ["Immediate and total psychological collapse.", "About what? In a voice that is definitely fine.", "Fake your own death. Relocate. Start over."],
     answer: "Immediate and total psychological collapse.",
     explanation: "The body knows before the brain does."
   },
   {
-    q: "A meeting has been scheduled that could have been an email. What is the appropriate response?",
-    options: ["Attend. Smile. Die a little inside.", "Reply All to say you can't make it. With a 400 word explanation.", "Burn it down and build something better in the ashes."],
+    q: "A meeting has been scheduled that could have been an email. Your response?",
+    options: ["Attend. Smile. Die a little inside.", "Reply All with a 400 word explanation of why you cannot attend.", "Burn it down and build something better in the ashes."],
     answer: "Attend. Smile. Die a little inside.",
     explanation: "This is called professionalism. Apparently."
   },
   {
-    q: "You've walked into a room and forgotten why. What do you do?",
-    options: ["Stand there long enough that it becomes your room now.", "Walk back out and in again. This always works. It never works.", "Accept that the information is gone. It belonged to a different you."],
-    answer: "Accept that the information is gone. It belonged to a different you.",
+    q: "You have walked into a room and forgotten why. What do you do?",
+    options: ["Stand there until it becomes your room now.", "Walk out and in again. This always works. It never works.", "Accept the information is gone. It belonged to a different you."],
+    answer: "Accept the information is gone. It belonged to a different you.",
     explanation: "Grief is the appropriate response."
   },
   {
     q: "What is the purpose of the snooze button?",
-    options: ["To feel in control of something. Anything.", "A legally binding contract with your future self that they will absolutely honour.", "Decoration. You were never getting up at that time."],
+    options: ["To feel in control of something. Anything.", "A binding contract with your future self they will absolutely honour.", "Decoration. You were never getting up at that time."],
     answer: "Decoration. You were never getting up at that time.",
     explanation: "The first alarm is a suggestion. The fifth is a threat."
   },
   {
     q: "Someone replies-all to a company-wide email to say thanks. What happens next?",
-    options: ["Seventeen more reply-alls. Each one worse.", "One brave soul replies-all asking people to stop replying-all.", "The company collapses. An era ends."],
+    options: ["Seventeen more reply-alls. Each one worse.", "One brave soul replies-all asking people to stop.", "The company collapses. An era ends."],
     answer: "Seventeen more reply-alls. Each one worse.",
     explanation: "It has never not been this."
   },
   {
-    q: "Why do humans say they'll remember something and don't need to write it down?",
-    options: ["Optimism. Tragic, beautiful optimism.", "To give gremlins something to do.", "They won't remember it. Nobody has ever remembered it."],
-    answer: "They won't remember it. Nobody has ever remembered it.",
+    q: "Why do humans say they will remember something and skip writing it down?",
+    options: ["Optimism. Tragic, beautiful optimism.", "To give gremlins something to do.", "They will not remember it. Nobody ever has."],
+    answer: "They will not remember it. Nobody ever has.",
     explanation: "The note exists for a reason. The reason is you."
   },
   {
-    q: "You send a message and see ... then it disappears. What happens next?",
+    q: "You send a message and see three dots then they disappear. What happens next?",
     options: ["Nothing. You wait forever. You are still waiting.", "A reply arrives 4 hours later as if nothing happened.", "You reread your message 47 times looking for what you did."],
     answer: "You reread your message 47 times looking for what you did.",
-    explanation: "You did nothing. But you'll never believe that."
+    explanation: "You did nothing. But you will never believe that."
   },
   {
-    q: "What is the correct number of tabs to have open at any one time?",
-    options: ["The exact number required. Which is never fewer than 23.", "One per unresolved anxiety. So: many.", "Tabs are a mindset. You cannot count a mindset."],
+    q: "What is the correct number of browser tabs to have open?",
+    options: ["The exact number required. Never fewer than 23.", "One per unresolved anxiety. So: many.", "Tabs are a mindset. You cannot count a mindset."],
     answer: "Tabs are a mindset. You cannot count a mindset.",
-    explanation: "Closing them means making a decision. We don't do that here."
+    explanation: "Closing them means making a decision. We do not do that here."
   },
   {
     q: "A seagull has stolen your chips. What is the correct response?",
@@ -130,101 +236,98 @@ var CARDS = [
     explanation: "You cannot let the seagull win. You simply cannot."
   },
   {
-    q: "Why do humans set 7 alarms instead of just getting up at the first one?",
-    options: ["The 7th alarm is the real alarm. The first 6 are psychological preparation.", "Each snooze is a tiny victory in an otherwise chaotic world.", "They have no idea. None of them have any idea."],
-    answer: "The 7th alarm is the real alarm. The first 6 are psychological preparation.",
-    explanation: "This is a system. It's a terrible system. It's the only system."
+    q: "Why do humans set 7 alarms instead of getting up at the first one?",
+    options: ["The 7th is the real alarm. The first 6 are psychological preparation.", "Each snooze is a tiny victory in an otherwise chaotic world.", "They have no idea. None of them have any idea."],
+    answer: "The 7th is the real alarm. The first 6 are psychological preparation.",
+    explanation: "It is a terrible system. It is the only system."
   },
   {
-    q: "You've been using technology incorrectly for 3 years and discover the right way. What do you do?",
-    options: ["Tell no one. Take this to the grave.", "Immediately explain the correct method to everyone as if you always knew.", "Sit with the shame. Let it change you."],
+    q: "You discover you have used technology incorrectly for 3 years. What do you do?",
+    options: ["Tell no one. Take this to the grave.", "Explain the correct method to everyone as if you always knew.", "Sit with the shame. Let it change you."],
     answer: "Tell no one. Take this to the grave.",
-    explanation: "What they don't know can't hurt you."
+    explanation: "What they do not know cannot hurt you."
   },
   {
-    q: "What does I'm fine mean?",
-    options: ["I am fine.", "I am the opposite of fine and I need you to ask again.", "I have achieved a level of not-fine so advanced it has looped back around."],
+    q: "What does I am fine actually mean?",
+    options: ["I am fine.", "I am the opposite of fine and need you to ask again.", "I have achieved a level of not-fine so advanced it has looped back around."],
     answer: "I have achieved a level of not-fine so advanced it has looped back around.",
     explanation: "Fine is a spectrum. We are at the far end."
   },
   {
-    q: "A gremlin has rearranged everything in your kitchen while you slept. What is the most human response?",
-    options: ["Spend 20 minutes looking for the thing that's right in front of you.", "Adapt completely within 3 days and forget it was ever different.", "Blame yourself somehow."],
+    q: "A gremlin rearranged your kitchen overnight. What is the most human response?",
+    options: ["Spend 20 minutes looking for the thing right in front of you.", "Adapt completely within 3 days and forget it was ever different.", "Blame yourself somehow."],
     answer: "Adapt completely within 3 days and forget it was ever different.",
     explanation: "Humans are infuriatingly resilient. The gremlins find this annoying."
   }
 ];
-/* ===================================================== */
 
-var deck=[], idx=0, state=0;
+var deck = [], idx = 0, state = 0;
 
-function shuffle(a){
-  var b=a.slice();
-  for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}
+function shuffle(a) {
+  var b = a.slice();
+  for (var i = b.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = b[i]; b[i] = b[j]; b[j] = t;
+  }
   return b;
 }
 
-function load(){
-  var c=CARDS[deck[idx]];
-  var f=document.getElementById('front');
-  f.className='face front';
-  f.innerHTML=
-    '<div class="q-num">Question '+(idx+1)+' of '+CARDS.length+'</div>'+
-    '<div class="q-text">'+c.q+'</div>'+
-    '<div class="opts">'+
-      ['A','B','C'].map(function(l,i){
-        return '<div class="opt"><span class="opt-tag">'+l+'</span>'+c.options[i]+'</div>';
-      }).join('')+
-    '</div>'+
+function load() {
+  var c = CARDS[deck[idx]];
+  var f = document.getElementById('front');
+  f.className = 'face front';
+  f.innerHTML =
+    '<div class="q-num">Question ' + (idx + 1) + ' of ' + CARDS.length + '</div>' +
+    '<div class="q-text">' + c.q + '</div>' +
+    '<div class="opts">' +
+      ['A', 'B', 'C'].map(function(l, i) {
+        return '<div class="opt"><span class="opt-tag">' + l + '</span>' + c.options[i] + '</div>';
+      }).join('') +
+    '</div>' +
     '<div class="tap-hint">tap again to reveal the answer</div>';
-  document.getElementById('counter').textContent='card '+(idx+1)+' of '+CARDS.length+' · reshuffles automatically';
+  document.getElementById('counter').textContent = 'card ' + (idx + 1) + ' of ' + CARDS.length + ' · reshuffles automatically';
 }
 
-function showAnswer(){
-  var c=CARDS[deck[idx]];
-  var f=document.getElementById('front');
-  f.className='face front answer-mode';
-  f.innerHTML=
-    '<div class="ans-label">✦ The Answer ✦</div>'+
-    '<div class="ans-text">'+c.answer+'</div>'+
-    '<div class="ans-explain">'+c.explanation+'</div>'+
+function showAnswer() {
+  var c = CARDS[deck[idx]];
+  var f = document.getElementById('front');
+  f.className = 'face front answer-mode';
+  f.innerHTML =
+    '<div class="ans-label">The Answer</div>' +
+    '<div class="ans-text">' + c.answer + '</div>' +
+    '<div class="ans-explain">' + c.explanation + '</div>' +
     '<div class="ans-tap">tap for next card</div>';
 }
 
-function handleClick(){
-  var card=document.getElementById('card');
-  if(state===0){ card.classList.add('flipped'); state=1; }
-  else if(state===1){ showAnswer(); state=2; }
-  else{ nextCard(); }
+function handleClick() {
+  var card = document.getElementById('card');
+  if (state === 0) { card.classList.add('flipped'); state = 1; }
+  else if (state === 1) { showAnswer(); state = 2; }
+  else { nextCard(); }
 }
 
-function nextCard(){
+function nextCard() {
   idx++;
-  if(idx>=CARDS.length){ deck=shuffle(CARDS.map(function(_,i){return i;})); idx=0; }
-  var card=document.getElementById('card');
+  if (idx >= CARDS.length) { deck = shuffle(CARDS.map(function(_, i) { return i; })); idx = 0; }
+  var card = document.getElementById('card');
   card.classList.remove('flipped');
-  var f=document.getElementById('front');
-  f.className='face front';
-  setTimeout(function(){ load(); }, 50);
-  state=0;
+  state = 0;
+  setTimeout(load, 50);
 }
 
-function resetDeck(){
-  deck=shuffle(CARDS.map(function(_,i){return i;}));
-  idx=0;
-  var card=document.getElementById('card');
-  card.classList.remove('flipped');
-  var f=document.getElementById('front');
-  f.className='face front';
-  setTimeout(function(){ load(); }, 50);
-  state=0;
+function resetDeck() {
+  deck = shuffle(CARDS.map(function(_, i) { return i; }));
+  idx = 0;
+  document.getElementById('card').classList.remove('flipped');
+  state = 0;
+  setTimeout(load, 50);
 }
 
 document.getElementById('scene').addEventListener('click', handleClick);
-document.getElementById('nextBtn').addEventListener('click', function(e){ e.stopPropagation(); nextCard(); });
-document.getElementById('resetBtn').addEventListener('click', function(e){ e.stopPropagation(); resetDeck(); });
+document.getElementById('nextBtn').addEventListener('click', function(e) { e.stopPropagation(); nextCard(); });
+document.getElementById('resetBtn').addEventListener('click', function(e) { e.stopPropagation(); resetDeck(); });
 
-deck=shuffle(CARDS.map(function(_,i){return i;}));
+deck = shuffle(CARDS.map(function(_, i) { return i; }));
 load();
 </script>
 </body>
